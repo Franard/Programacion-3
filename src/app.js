@@ -4,12 +4,26 @@ import especialidadesRoutes from './routes/especialidades.routes.js';
 
 const app = express();
 
-// Middlware
+// Midds
 app.use(morgan('dev'));
 app.use(express.json());
 
-// Rutas
-app.use('/api/especialidades', especialidadesRoutes);
+//versionado
+app.use('/api/v1/especialidades', especialidadesRoutes);
+
+//E404
+app.use((req, res, next) => {
+    res.status(404).json({ status: 'error', message: 'Ruta no encontrada' });
+});
+
+//
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).json({ 
+        status: 'error', 
+        message: 'Algo salió mal en el servidor, por favor intente más tarde.' 
+    });
+});
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
