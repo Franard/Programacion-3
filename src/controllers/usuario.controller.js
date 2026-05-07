@@ -1,27 +1,43 @@
 import {
-    obtenerUsuario,
-    crearUsuario
+    crearUsuario,
+    obtenerUsuarios
 } from '../models/usuario.model.js';
 
-export const getUsuario = async (req, res) => {
+export const getUsuarios = async (req, res) => {
+
     try {
-        const usuario = await obtenerUsuario();
-        res.json(usuario);
+
+        const usuarios = await obtenerUsuarios();
+
+        res.json(usuarios);
+
     } catch (error) {
-        res.status(500).json(error);
+
+        res.status(500).json({
+            error: error.message
+        });
+
     }
+
 };
 
 export const postUsuario = async (req, res) => {
-    try {
-        const { id, documento, nombre, apellido, email, contraseña, foto_path, rol, activo } = req.body;
 
-        await crearUsuario(id, documento, nombre, apellido, email, contraseña, foto_path, rol, activo);
+    try {
+
+        const resultado = await crearUsuario(req.body);
 
         res.json({
-            mensaje: 'Usuario creado'
+            mensaje: 'Usuario creado',
+            id: resultado.insertId
         });
+
     } catch (error) {
-        res.status(500).json(error);
+
+        res.status(500).json({
+            error: error.message
+        });
+
     }
+
 };
