@@ -1,11 +1,11 @@
 info:
-  name: Listar Especialidades
+  name: Browse medicos
   type: http
   seq: 1
 
 http:
   method: GET
-  url: http://localhost:3000/api/especialidades
+  url: http://localhost:3000/api/v1/medicos
   auth: inherit
 
 settings:
