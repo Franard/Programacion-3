@@ -1,7 +1,9 @@
+import 'dotenv/config';
 import express from 'express';
 import morgan from 'morgan';
 import especialidadesRoutes from './routes/especialidades.routes.js';
 import usuarioRoutes from './routes/usuario.routes.js';
+
 
 const app = express();
 

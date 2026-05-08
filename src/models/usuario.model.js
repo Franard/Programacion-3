@@ -3,7 +3,7 @@ import { pool } from '../db.js';
 export const obtenerUsuarios = async () => {
 
     const [rows] = await pool.query(
-        'SELECT * FROM usuarios'
+        'SELECT * FROM usuario'
     );
 
     return rows;
@@ -24,7 +24,7 @@ export const crearUsuario = async (usuario) => {
 
     const [result] = await pool.query(
         `
-        INSERT INTO usuarios
+        INSERT INTO usuario
         (
             documento,
             nombre,

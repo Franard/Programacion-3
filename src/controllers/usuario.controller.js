@@ -13,6 +13,8 @@ export const getUsuarios = async (req, res) => {
 
     } catch (error) {
 
+        console.log(error);
+
         res.status(500).json({
             error: error.message
         });
@@ -32,12 +34,14 @@ export const postUsuario = async (req, res) => {
             id: resultado.insertId
         });
 
-    } catch (error) {
+    } 
+    catch (error) {
+
+        console.log(error);
 
         res.status(500).json({
             error: error.message
         });
 
     }
-
 };

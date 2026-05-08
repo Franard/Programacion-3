@@ -1,5 +1,6 @@
 import mysql from 'mysql2/promise';
 
+
 export const pool = mysql.createPool({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
@@ -9,5 +10,5 @@ export const pool = mysql.createPool({
     connectionLimit: 10,
     queueLimit: 0
 });
-
+console.log(process.env.DB_USER);
 console.log('Base de datos conectada');
