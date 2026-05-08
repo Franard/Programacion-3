@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-05-2026 a las 19:28:32
--- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.2.12
+-- Tiempo de generación: 08-05-2026 a las 20:09:09
+-- Versión del servidor: 10.4.27-MariaDB
+-- Versión de PHP: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -42,7 +42,8 @@ INSERT INTO `especialidades` (`id_especialidad`, `nombre`, `activo`) VALUES
 (2, 'CLÍNICA', 1),
 (3, 'TRAUMATOLOGÍA', 1),
 (4, 'INFECTOLOGÍA', 1),
-(9, 'NEUROLOGÍA', 1);
+(9, 'NEUROLOGIA', 1),
+(15, 'Cardiología Infantil', 0);
 
 -- --------------------------------------------------------
 
@@ -64,10 +65,11 @@ CREATE TABLE `medicos` (
 --
 
 INSERT INTO `medicos` (`id_medico`, `id_usuario`, `id_especialidad`, `matricula`, `descripcion`, `valor_consulta`) VALUES
-(1, 1, 1, 1000, 'test', 5000.00),
-(2, 2, 1, 2000, 'test', 5000.00),
-(3, 3, 3, 3000, 'test', 10000.00),
-(4, 4, 4, 4000, 'test', 15000.00);
+(1, 1, 1, 1000, 'test', '5000.00'),
+(2, 2, 1, 2000, 'test', '5000.00'),
+(3, 3, 3, 3000, 'test', '10000.00'),
+(4, 4, 4, 4000, 'test', '15000.00'),
+(5, 1, 1, 5000, 'Especialista en cardiología clínica', '15000.50');
 
 -- --------------------------------------------------------
 
@@ -112,10 +114,10 @@ CREATE TABLE `obras_sociales` (
 --
 
 INSERT INTO `obras_sociales` (`id_obra_social`, `nombre`, `descripcion`, `porcentaje_descuento`, `es_particular`, `activo`) VALUES
-(1, 'Jerárquicos', 'jer', 10.00, 0, 1),
-(2, 'OSUNER', 'osu', 10.00, 0, 1),
-(3, 'OSECAC', 'ose', 11.00, 0, 1),
-(4, 'OSUNER 3', 'OSU', 13.00, 0, 1);
+(1, 'Jerárquicos', 'jer', '10.00', 0, 1),
+(2, 'OSUNER', 'osu', '10.00', 0, 1),
+(3, 'OSECAC', 'ose', '11.00', 0, 1),
+(4, 'OSUNER 3', 'OSU', '13.00', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -160,12 +162,12 @@ CREATE TABLE `turnos_reservas` (
 --
 
 INSERT INTO `turnos_reservas` (`id_turno_reserva`, `id_medico`, `id_paciente`, `id_obra_social`, `fecha_hora`, `valor_total`, `atentido`, `activo`) VALUES
-(1, 1, 1, 1, '2026-04-01 17:00:00', 4500.00, 0, 1),
-(2, 3, 2, 2, '2026-04-01 18:00:00', 9000.00, 0, 1),
-(4, 4, 3, 3, '2026-04-01 19:00:00', 13500.00, 0, 1),
-(5, 3, 2, 2, '2026-04-14 18:00:00', 9000.00, 0, 1),
-(6, 3, 2, 2, '2026-04-21 18:00:00', 9000.00, 0, 1),
-(7, 4, 3, 3, '2026-05-07 16:00:00', 133500.00, 0, 1);
+(1, 1, 1, 1, '2026-04-01 17:00:00', '4500.00', 0, 1),
+(2, 3, 2, 2, '2026-04-01 18:00:00', '9000.00', 0, 1),
+(4, 4, 3, 3, '2026-04-01 19:00:00', '13500.00', 0, 1),
+(5, 3, 2, 2, '2026-04-14 18:00:00', '9000.00', 0, 1),
+(6, 3, 2, 2, '2026-04-21 18:00:00', '9000.00', 0, 1),
+(7, 4, 3, 3, '2026-05-07 16:00:00', '133500.00', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -239,7 +241,7 @@ CREATE TABLE `v_pacientes` (
 --
 DROP TABLE IF EXISTS `v_medicos`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_medicos`  AS SELECT `m`.`id_medico` AS `id_medico`, `m`.`id_usuario` AS `id_usuario`, `u`.`apellido` AS `apellido`, `u`.`nombres` AS `nombres`, `u`.`email` AS `email`, `u`.`foto_path` AS `foto_path` FROM (`medicos` `m` join `usuarios` `u` on(`m`.`id_usuario` = `u`.`id_usuario`)) WHERE `u`.`activo` = 1 ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_medicos`  AS SELECT `m`.`id_medico` AS `id_medico`, `m`.`id_usuario` AS `id_usuario`, `u`.`apellido` AS `apellido`, `u`.`nombres` AS `nombres`, `u`.`email` AS `email`, `u`.`foto_path` AS `foto_path` FROM (`medicos` `m` join `usuarios` `u` on(`m`.`id_usuario` = `u`.`id_usuario`)) WHERE `u`.`activo` = 11  ;
 
 -- --------------------------------------------------------
 
@@ -248,7 +250,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `v_pacientes`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_pacientes`  AS SELECT `p`.`id_paciente` AS `id_paciente`, `p`.`id_usuario` AS `id_usuario`, `u`.`apellido` AS `apellido`, `u`.`nombres` AS `nombres`, `u`.`email` AS `email`, `os`.`id_obra_social` AS `id_obra_social`, `os`.`descripcion` AS `descripcion_obra_social`, `u`.`foto_path` AS `foto_path` FROM ((`pacientes` `p` join `usuarios` `u` on(`p`.`id_usuario` = `u`.`id_usuario`)) join `obras_sociales` `os` on(`p`.`id_obra_social` = `os`.`id_obra_social`)) WHERE `u`.`activo` = 1 ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_pacientes`  AS SELECT `p`.`id_paciente` AS `id_paciente`, `p`.`id_usuario` AS `id_usuario`, `u`.`apellido` AS `apellido`, `u`.`nombres` AS `nombres`, `u`.`email` AS `email`, `os`.`id_obra_social` AS `id_obra_social`, `os`.`descripcion` AS `descripcion_obra_social`, `u`.`foto_path` AS `foto_path` FROM ((`pacientes` `p` join `usuarios` `u` on(`p`.`id_usuario` = `u`.`id_usuario`)) join `obras_sociales` `os` on(`p`.`id_obra_social` = `os`.`id_obra_social`)) WHERE `u`.`activo` = 11  ;
 
 --
 -- Índices para tablas volcadas
@@ -318,13 +320,13 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `especialidades`
 --
 ALTER TABLE `especialidades`
-  MODIFY `id_especialidad` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_especialidad` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `medicos`
 --
 ALTER TABLE `medicos`
-  MODIFY `id_medico` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_medico` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `medicos_obras_sociales`
