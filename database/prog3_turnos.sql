@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-05-2026 a las 20:09:09
+-- Tiempo de generación: 09-05-2026 a las 00:34:14
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 8.2.0
 
@@ -69,7 +69,8 @@ INSERT INTO `medicos` (`id_medico`, `id_usuario`, `id_especialidad`, `matricula`
 (2, 2, 1, 2000, 'test', '5000.00'),
 (3, 3, 3, 3000, 'test', '10000.00'),
 (4, 4, 4, 4000, 'test', '15000.00'),
-(5, 1, 1, 5000, 'Especialista en cardiología clínica', '15000.50');
+(5, 1, 1, 5000, 'Especialista en cardiología clínica', '15000.50'),
+(6, 16, 1, 7000, 'Médico recién graduado', '25000.00');
 
 -- --------------------------------------------------------
 
@@ -200,7 +201,8 @@ INSERT INTO `usuarios` (`id_usuario`, `documento`, `apellido`, `nombres`, `email
 (6, '41000112', 'Hunk', 'Lorena', 'hunlor@correo.com', '464db19217fabdaabc5add321054f39216d03edfef2efaf8c6769485415b7f25', '', 2, 1),
 (7, '41000113', 'Aguirre', 'Brian', 'agubri@correo.com', '2dfa174ae2688ec55d00f57c5a0a7783ba1f0e2981ab7df9f1cf933686c15274', '', 2, 1),
 (8, '51000111', 'Fernandez', 'Benito', 'ferben@correo.com', 'f127f4e9e4248f77eaa446ea9bff721e3e79eedf114ba6e1cfc633853ef07b4c', '', 3, 1),
-(10, '51000112', 'Gomez', 'Silvia', 'gomsil@correo.com', '601de117008d80e65ffad05dce97462d8f1b1e9aad6d68cf2b289703b8366b52', '', 3, 1);
+(10, '51000112', 'Gomez', 'Silvia', 'gomsil@correo.com', '601de117008d80e65ffad05dce97462d8f1b1e9aad6d68cf2b289703b8366b52', '', 3, 1),
+(16, '40123456', 'Quito', 'Esteban', 'esteban@correo.com', 'clave123', 'sin-foto.jpg', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -326,7 +328,7 @@ ALTER TABLE `especialidades`
 -- AUTO_INCREMENT de la tabla `medicos`
 --
 ALTER TABLE `medicos`
-  MODIFY `id_medico` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_medico` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `medicos_obras_sociales`
@@ -356,7 +358,7 @@ ALTER TABLE `turnos_reservas`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_usuario` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- Restricciones para tablas volcadas
