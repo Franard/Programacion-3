@@ -1,23 +1,28 @@
-import * as especialidadesData from '../data/especialidades.data.js';
+import EspecialidadesDB from '../db/especialidades.db.js';
 
-export const getAllEspecialidadesService = async () => await especialidadesData.getAllEspecialidadesData();
+export default class EspecialidadesService {
+    constructor() {
+        this.db = new EspecialidadesDB();
+    }
 
-export const getEspecialidadByIdService = async (id) => {
-    const especialidad = await especialidadesData.getEspecialidadByIdData(id);
-    if (!especialidad) throw new Error('Especialidad no encontrada');
-    return especialidad;
-};
+    async buscarTodas() {
+        return await this.db.buscarTodas();
+    }
 
-export const createEspecialidadService = async (nombre) => {
-    return await especialidadesData.createEspecialidadData(nombre);
-};
+    async buscarPorId(id) {
+        return await this.db.buscarPorId(id);
+    }
 
-export const updateEspecialidadService = async (id, nombre) => {
-    await getEspecialidadByIdService(id); //Existe?
-    await especialidadesData.updateEspecialidadData(id, nombre);
-};
+    async crear(datos) {
+        const insertId = await this.db.crear(datos.nombre);
+        return insertId;
+    }
 
-export const deleteEspecialidadService = async (id) => {
-    await getEspecialidadByIdService(id);
-    await especialidadesData.deleteEspecialidadData(id);
-};
+    async actualizar(id, datos) {
+        await this.db.actualizar(id, datos.nombre);
+    }
+
+    async borrar(id) {
+        await this.db.borrar(id);
+    }
+}

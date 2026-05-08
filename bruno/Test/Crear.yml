@@ -1,11 +1,17 @@
 info:
-  name: Listar Especialidades
+  name: Crear
   type: http
   seq: 1
 
 http:
-  method: GET
+  method: POST
   url: http://localhost:3000/api/v1/especialidades
+  body:
+    type: json
+    data: |-
+      {
+          "nombre": "Cardiología Infantil"
+      }
   auth: inherit
 
 settings:
