@@ -21,10 +21,10 @@ class PacientesDB {
         );
         return result.insertId;
     }
-    async actualizarPaciente(id, nombre, dni) {
+    async actualizarPaciente(id_paciente, idUsuario, idObraSocial) {
         await pool.query(
-            'UPDATE pacientes SET nombre = ?, dni = ? WHERE id_paciente = ?',
-            [nombre, dni, id]
+            'UPDATE pacientes SET idUsuario = ?, idObraSocial = ? WHERE id_paciente = ?',
+            [idUsuario, idObraSocial, id_paciente]
         );
     }
     async borrarPaciente(id) {

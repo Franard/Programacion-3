@@ -3,7 +3,7 @@ import { pool } from './connection.js';
 class MedicosObrasSocialesDB {
     async buscarPorId(id_MOS) {
         const [rows] = await pool.query(
-            'SELECT * FROM medicos_obras_sociales WHERE id = ? AND activo = 1',
+            'SELECT * FROM medicos_obras_sociales WHERE id_MOS = ? AND activo = 1',
             [id_MOS]
         );
         return rows[0];
@@ -21,7 +21,7 @@ class MedicosObrasSocialesDB {
             [id_MOS, idObraSocial]
         );
     }
-    async modificarMedObr(id_MOS, idObraSocial, activo) {
+    async actualizarMedObr(id_MOS, idObraSocial, activo) {
         await pool.query(
             'UPDATE medicos_obras_sociales SET activo = ? WHERE id = ? AND id_obra_social = ?',
             [activo, id_MOS, idObraSocial]
