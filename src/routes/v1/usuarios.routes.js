@@ -4,7 +4,11 @@ import { validarUsuario } from '../../middlewares/usuarios.validator.js';
 
 const router = Router();
 
-router.get('/', UsuariosController.getUsuarios);
-router.post('/', validarUsuario, UsuariosController.postUsuario); 
+// Rutas del BREAD para Usuarios
+router.get('/', UsuariosController.obtenerUsuarios);
+router.get('/:id', UsuariosController.obtenerUsuarioPorId);
+router.post('/', validarUsuario, UsuariosController.crearUsuario);  
+router.put('/:id', validarUsuario, UsuariosController.actualizarUsuario); 
+router.delete('/:id', UsuariosController.borrarUsuario);           
 
 export default router;
