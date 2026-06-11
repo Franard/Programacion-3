@@ -15,11 +15,46 @@ class PacientesDB {
         return rows[0];
     }
     async crearPaciente(idPaciente, idUsuario, idObraSocial) {
-        const [result] = await pool.query(
-            'INSERT INTO pacientes (idPaciente, idUsuario ,idObraSocial) VALUES (?, ?, ?)',
-            [idPaciente, idUsuario, idObraSocial]
-        );
-        return result.insertId;
+
+        const conexion = await pool.getConnection();
+
+        try {
+
+            await conexion.beginTransaction();
+
+            // Crear paciente
+            const [result] = await conexion.query(
+                `INSERT INTO pacientes 
+                ( idUsuario, idObraSocial) 
+                VALUES ( ?, ?)`,
+                [idUsuario, idObraSocial]
+            );
+
+
+            // Cambiar rol del usuario a paciente
+            await conexion.query(
+                `UPDATE usuarios 
+                SET rol = 2 
+                WHERE id_usuario = ?`,
+                [idUsuario]
+            );
+
+
+            await conexion.commit();
+
+            return result.insertId;
+
+
+        } catch(error){
+
+            await conexion.rollback();
+            throw error;
+
+        } finally {
+
+            conexion.release();
+
+        }
     }
     async actualizarPaciente(id_paciente, idUsuario, idObraSocial) {
         await pool.query(
