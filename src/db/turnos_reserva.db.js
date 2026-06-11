@@ -1,40 +1,40 @@
 import { pool } from './connection.js';
 class TurnosDB {
-    async buscarPacientes() {
+    async buscarTurnos() {
         const [rows] = await pool.query(
-            'SELECT * FROM pacientes WHERE activo = 1'
+            'SELECT * FROM turnos WHERE activo = 1'
         );
         return rows;
     }
-    async buscarPorId(id) {
+    async buscarTurnoPorId(id) {
         const [rows] = await pool.query(
-            'SELECT * FROM pacientes WHERE id = ? AND activo = 1',
+            'SELECT * FROM turnos WHERE id_turno = ? AND activo = 1',
             [id]
         );
         return rows[0];
     }
-    async crear(idMedico, idPaciente, idObrasocial, fecha_hora, valor_total, atendido) {
+    async crearTurno(idMedico, idPaciente, idObrasocial, fecha_hora, valor_total, atendido) {
         const [result] = await pool.query(
-            'INSERT INTO pacientes (id_Medico, id_Paciente, idObrasocial, fecha_hora, valor_total, atendido, activo) VALUES (?, ?, ?, ?, ?, 0, 1)',
+            'INSERT INTO turnos (id_Medico, id_Paciente, idObrasocial, fecha_hora, valor_total, atendido, activo) VALUES (?, ?, ?, ?, ?, 0, 1)',
             [idMedico, idPaciente, idObrasocial, fecha_hora, valor_total, atendido]
         );
         return result.insertId;
     }
-    async actualizar(id, fecha_hora, valor_total, atendido, activo) {
+    async actualizarTurno(id, fecha_hora, valor_total, atendido, activo) {
         await pool.query(
-            'UPDATE pacientes SET fecha_hora = ?, valor_total = ?, atendido = ?, activo = ? WHERE id = ?',
+            'UPDATE turnos SET fecha_hora = ?, valor_total = ?, atendido = ?, activo = ? WHERE id_turno = ?',
             [fecha_hora, valor_total, atendido, activo, id]
         );
     }
     async atender(id) {
         await pool.query(
-            'UPDATE pacientes SET atendido = 1 WHERE id = ?',
+            'UPDATE turnos SET atendido = 1 WHERE id_turno = ?',
             [id]
         );
     }
-    async borrar(id) {
+    async borrarTurno(id) {
         await pool.query(
-            'UPDATE pacientes SET activo = 0 WHERE id = ?',
+            'UPDATE turnos SET activo = 0 WHERE id_turno = ?',
             [id]
         );
     }
