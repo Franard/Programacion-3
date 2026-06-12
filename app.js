@@ -8,6 +8,7 @@ import pacientesRouter from './src/routes/v1/pacientes.routes.js';
 import obrasSocialesRouter from './src/routes/v1/obras_sociales.routes.js';
 import medicosObrasSocialesRouter from './src/routes/v1/medicos_obras_sociales.routes.js';
 import turnosReservaRouter from './src/routes/v1/turnos_reserva.routes.js';
+import authRoutes from './src/routes/v1/auth.routes.js';
 
 const app = express();
 app.use(morgan('dev'));
@@ -20,6 +21,7 @@ app.use('/api/v1/pacientes', pacientesRouter);
 app.use('/api/v1/obras-sociales', obrasSocialesRouter);
 app.use('/api/v1/medicos-obras-sociales', medicosObrasSocialesRouter);
 app.use('/api/v1/turnos-reserva', turnosReservaRouter);
+app.use('/api/v1/auth', authRoutes);
 
 
 app.use((req, res) => {
