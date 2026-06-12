@@ -1,13 +1,14 @@
-import {router} from 'express';
-import {validateTurnosReserva} from '../../middlewares/turnos_reserva.validator.js';
-import TurnosReservaController from '../../controllers/turnos_reserva.controller.js';
+import {Router} from 'express';
+import {validarTurnosReservas} from '../../middlewares/turnos_reserva.validator.js';
+import turnosReservaController from '../../controllers/turnos_reserva.controller.js';
 
-const turnosReservaController = new TurnosReservaController();
-const turnosReservaRouter = router();
 
+const turnosReservaRouter = Router();
+
+turnosReservaRouter.get('/', turnosReservaController.buscarTurnos);
 turnosReservaRouter.get('/:id', turnosReservaController.buscarTurnoPorId);
-turnosReservaRouter.post('/', validateTurnosReserva, turnosReservaController.crearTurno);
-turnosReservaRouter.put('/:id', validateTurnosReserva, turnosReservaController.actualizarTurno);
+turnosReservaRouter.post('/', validarTurnosReservas, turnosReservaController.crearTurno);
+turnosReservaRouter.put('/:id', validarTurnosReservas, turnosReservaController.actualizarTurno);
 turnosReservaRouter.patch('/:id/atender', turnosReservaController.atenderTurno);
 turnosReservaRouter.delete('/:id', turnosReservaController.borrarTurno);
 

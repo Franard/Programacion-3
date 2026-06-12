@@ -1,20 +1,20 @@
-import pacientesDB from '../db/pacientes.db.js';
+import PacientesDB from '../db/pacientes.db.js';
 
 class PacientesService {
     buscarPacientes = async () => {
-        return await pacientesDB.buscarPacientes();
+        return await PacientesDB.buscarPacientes();
     };
     buscarPacientePorId = async (idPaciente) => {
-        return await pacientesDB.buscarPacientePorId(idPaciente);
+        return await PacientesDB.buscarPacientePorId(idPaciente);
     };
     crearPaciente = async (idUsuario, idObraSocial) => {
-        return await pacientesDB.crearPaciente(idUsuario, idObraSocial);
+        return await PacientesDB.crearPaciente(idUsuario, idObraSocial);
     };
     actualizarPaciente = async (idPaciente, idUsuario, idObraSocial) => {
-        return await pacientesDB.actualizarPaciente(idPaciente, idUsuario, idObraSocial);
+        return await PacientesDB.actualizarPaciente(idPaciente, idUsuario, idObraSocial);
     };
     borrarPaciente = async (idPaciente) => {
-        return await pacientesDB.borrarPaciente(idPaciente);
+        return await PacientesDB.borrarPaciente(idPaciente);
     };
 }
 

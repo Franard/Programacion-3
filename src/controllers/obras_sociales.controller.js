@@ -50,3 +50,5 @@ class ObrasSocialesController {
         }
     };
 }
+
+export default new ObrasSocialesController();

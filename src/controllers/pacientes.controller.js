@@ -50,3 +50,5 @@ class PacientesController {
         }
     };
 }
+
+export default new PacientesController();

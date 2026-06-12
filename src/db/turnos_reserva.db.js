@@ -40,4 +40,4 @@ class TurnosDB {
     }
 }
 
-export const turnosDB = new TurnosDB();
+export default new TurnosDB();

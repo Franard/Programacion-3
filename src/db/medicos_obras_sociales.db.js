@@ -29,4 +29,4 @@ class MedicosObrasSocialesDB {
     }
 }
 
-export const medicosObrasSocialesDB = new MedicosObrasSocialesDB();
+export default new MedicosObrasSocialesDB();

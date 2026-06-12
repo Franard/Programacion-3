@@ -20,4 +20,4 @@ class TurnosService {
     }
 }
 
-export const turnosService = new TurnosService();
+export default new TurnosService();

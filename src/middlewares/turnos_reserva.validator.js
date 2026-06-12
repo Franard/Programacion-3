@@ -1,6 +1,6 @@
 import {check, validationResult} from 'express-validator';
 
-export const validarTurnoReserva = [
+export const validarTurnosReservas = [
     check('idPaciente')
         .notEmpty().withMessage('El id del paciente es obligatorio')
         .isInt().withMessage('El id del paciente debe ser un número entero'),

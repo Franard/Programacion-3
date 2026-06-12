@@ -30,4 +30,4 @@ class ObrasSocialesDB {
 }
  
 
-export const obrasSocialesDB = new ObrasSocialesDB();
+export default new ObrasSocialesDB();

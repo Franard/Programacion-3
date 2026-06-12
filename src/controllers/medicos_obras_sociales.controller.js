@@ -1,5 +1,14 @@
 import medicosOS from '../services/medicos_obras_sociales.service.js';
 class MedicosObrasSocialesController {
+    
+    buscarMOS = async (req, res) => {
+        try {
+            const medicosOSList = await medicosOS.buscarMOS();
+            res.json(medicosOSList);
+        } catch (error) {
+            res.status(500).json({ message: 'Error al buscar los medicos-obras sociales', error });
+        }
+    };
     buscarMOSPorId = async (req, res) => {
         const id_MOS = req.params.id;
         try {
@@ -44,4 +53,6 @@ class MedicosObrasSocialesController {
             res.status(500).json({ message: 'Error al borrar el medico-obra social', error });
         }
     }   ;
-}                   
+}
+
+export default new MedicosObrasSocialesController();

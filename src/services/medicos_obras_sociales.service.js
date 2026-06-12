@@ -1,4 +1,4 @@
-import MedicosOSDB from '../db/medicos_obras_sociales.db.js';
+import MedicosObrasSocialesDB from '../db/medicos_obras_sociales.db.js';
 
 class MedicosObrasSocialesService {
     buscarMOSPorId = async (id_MOS) => {

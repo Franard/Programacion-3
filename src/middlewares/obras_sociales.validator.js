@@ -1,6 +1,6 @@
 import { check, validationResult  } from "express-validator";
 
-export const validarObraSocial = [
+export const validarObrasSociales = [
     check('nombre')
         .notEmpty().withMessage('El nombre de la obra social es obligatorio')
         .isString().withMessage('El nombre debe ser texto')

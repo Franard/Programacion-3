@@ -1,14 +1,13 @@
-import {router} from 'express';
-import {validatePacientes} from '../../middlewares/pacientes.validator.js';
+import {Router} from 'express';
+import {validarPacientes} from '../../middlewares/pacientes.validator.js';
 import PacientesController from '../../controllers/pacientes.controller.js';
 
-const pacientesRouter = router();
+const router = Router();
 
-const pacientesController = new PacientesController();
+router.get('/',PacientesController.buscarPacientes);
+router.get('/:id',PacientesController.buscarPacientePorId);
+router.post('/',validarPacientes,PacientesController.crearPaciente);
+router.put('/:id',validarPacientes,PacientesController.actualizarPaciente);
+router.delete('/:id',PacientesController.borrarPaciente);
 
-pacientesRouter.get('/:id', pacientesController.obtenerPacientePorId);
-pacientesRouter.post('/', validatePacientes, pacientesController.crearPaciente);
-pacientesRouter.put('/:id', validatePacientes, pacientesController.actualizarPaciente);
-pacientesRouter.delete('/:id', pacientesController.eliminarPaciente);
-
-export default pacientesRouter;
+export default router;

@@ -70,4 +70,4 @@ class PacientesDB {
     }
 }
 
-export const pacientesDB = new PacientesDB();
+export default new PacientesDB();

@@ -1,6 +1,6 @@
 import {check, validationResult  } from 'express-validator';
 
-export const validarPaciente = [
+export const validarPacientes = [
     check('idPaciente')
     .notEmpty().withMessage('El id del paciente es obligatorio')
     .isInt().withMessage('El id del paciente debe ser un número entero'),
@@ -18,3 +18,4 @@ export const validarPaciente = [
         next();
     }
 ];
+
