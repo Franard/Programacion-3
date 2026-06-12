@@ -47,10 +47,16 @@ class MedicosDB {
 
     //Delete, descantivando usuario
     borrar = async (id) => {
-        const [medico] = await pool.query('SELECT id_usuario FROM medicos WHERE id_medico = ?', [id]);
-        
-        if (medico.length === 0) return 0; 
-       
+        const [medico] = await pool.query(
+            'SELECT id_usuario FROM medicos WHERE id_medico = ?',
+            [id]
+        );
+        if(medico.length === 0)
+            return 0;
+        await pool.query(
+            'UPDATE medicos SET activo = 0 WHERE id_medico = ?',
+            [id]
+        );
         const [resultado] = await pool.query(
             'UPDATE usuarios SET activo = 0 WHERE id_usuario = ?',
             [medico[0].id_usuario]
