@@ -3,18 +3,18 @@ import { pool } from './connection.js';
 class PacientesDB {
     async buscarPacientes() {
         const [rows] = await pool.query(
-            'SELECT * FROM pacientes WHERE id_paciente = Not NULL',
+            'SELECT * FROM pacientes WHERE idPaciente = Not NULL',
         );
         return rows;
     }
     async buscarPacientePorId(id) {
         const [rows] = await pool.query(
-             'SELECT * FROM pacientes WHERE id_paciente = ?',
+             'SELECT * FROM pacientes WHERE idPaciente = ?',
              [id]
         );
         return rows[0];
     }
-    async crearPaciente(idPaciente, idUsuario, idObraSocial) {
+    async crearPaciente(idUsuario, idObraSocial) {
 
         const conexion = await pool.getConnection();
 

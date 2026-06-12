@@ -20,10 +20,10 @@ class TurnosDB {
         );
         return result.insertId;
     }
-    async actualizarTurno(id, fecha_hora, valor_total, atendido, activo) {
+    async actualizarTurno(idTurno, idMedico, idPaciente, idObrasocial, fecha_hora, valor_total, atendido) {
         await pool.query(
-            'UPDATE turnos SET fecha_hora = ?, valor_total = ?, atendido = ?, activo = ? WHERE id_turno = ?',
-            [fecha_hora, valor_total, atendido, activo, id]
+            'UPDATE turnos SET id_Medico = ?, id_Paciente = ?, idObrasocial = ?, fecha_hora = ?, valor_total = ?, atendido = ? WHERE id_turno = ?',
+            [idTurno, idMedico, idPaciente, idObrasocial, fecha_hora, valor_total, atendido]
         );
     }
     async atender(id) {

@@ -1,13 +1,13 @@
 import { pool } from './connection.js';
 
 class ObrasSocialesDB {
-    async buscarOBActivas() {
+    async buscarOSActivas() {
         const [rows] = await pool.query(
             'SELECT * FROM obras_sociales WHERE activo = 1'
         );
         return rows;
     }
-    async buscarOBPorId(id) {
+    async buscarOSPorId(id) {
         const [rows] = await pool.query(
             'SELECT * FROM obras_sociales WHERE idObraSocial = ? AND activo = 1',
             [id]
@@ -21,7 +21,7 @@ class ObrasSocialesDB {
         );
         return result.insertId;
     }
-    async actualizarOB(id, nombre, descripcion, porcentaje, es_particular, activo) {
+    async actualizarOS(id, nombre, descripcion, porcentaje, es_particular, activo) {
         await pool.query(
             'UPDATE obras_sociales SET nombre = ?, descripcion = ?, porcentaje = ?, es_particular = ?, activo = ? WHERE idObraSocial = ?',
             [nombre, descripcion, porcentaje, es_particular, activo, id]
