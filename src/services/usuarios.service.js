@@ -1,24 +1,21 @@
+// Código de Angel C.
 import UsuariosDB from '../db/usuarios.db.js';
 
 class UsuariosService {
-    obtenerUsuarios = async () => {
-        return await UsuariosDB.obtenerUsuarios();
+    obtenerTodos = async () => {
+        return await UsuariosDB.obtenerTodosLosUsuarios();
     };
-
-    obtenerPorId = async (id) => {
-        const usuario = await UsuariosDB.obtenerPorId(id);
-        if (!usuario) {
-            const error = new Error('Usuario no encontrado');
-            error.status = 404;
-            throw error;
-        }
-        return usuario;
+    obtenerUsuarioPorId = async (id) => {
+            return await UsuariosDB.obtenerUsuarioPorId(id);
     };
-
     crearUsuario = async (usuario) => {
-        const insertId = await UsuariosDB.crearUsuario(usuario);
-        // Retornar el objeto completo (Regla 4)
-        return await UsuariosDB.obtenerPorId(insertId);
+        return await UsuariosDB.crearUsuario(usuario);
+    };
+    actualizarUsuario = async (id, usuario) => {
+            return await UsuariosDB.actualizarUsuario(id, usuario);
+    };
+    borrarUsuario = async (id) => {
+            return await UsuariosDB.borrarUsuario(id);
     };
 }
 

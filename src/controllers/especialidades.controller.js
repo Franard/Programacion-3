@@ -1,3 +1,4 @@
+// Código de Angel C.
 import EspecialidadesService from '../services/especialidades.service.js';
 
 export default class EspecialidadesController {
