@@ -6,19 +6,41 @@ class MedicosService {
     };
 
     obtenerPorId = async (id) => {
-        return await MedicosDB.obtenerPorId(id);
+        const medico = await MedicosDB.obtenerPorId(id);
+        if (!medico) {
+            const error = new Error('Médico no encontrado o inactivo');
+            error.status = 404;
+            throw error;
+        }
+        return medico;
     };
 
-    crear = async (medico) => {
-        return await MedicosDB.crear(medico);
+    crear = async (medicoData) => {
+        const nuevoId = await MedicosDB.crear(medicoData);
+        // Retornar el objeto completo creado (Regla 4)
+        return await MedicosDB.obtenerPorId(nuevoId);
     };
 
-    actualizar = async (id, medico) => {
-        return await MedicosDB.actualizar(id, medico);
+    actualizar = async (id, medicoData) => {
+        // Validar existencia primero en el Service (Regla 4)
+        const existe = await MedicosDB.obtenerPorId(id);
+        if (!existe) {
+            const error = new Error('Médico no encontrado para actualizar');
+            error.status = 404;
+            throw error;
+        }
+        await MedicosDB.actualizar(id, medicoData);
     };
 
     borrar = async (id) => {
-        return await MedicosDB.borrar(id);
+        // Validar existencia primero en el Service (Regla 4)
+        const existe = await MedicosDB.obtenerPorId(id);
+        if (!existe) {
+            const error = new Error('Médico no encontrado para borrar');
+            error.status = 404;
+            throw error;
+        }
+        await MedicosDB.borrar(id);
     };
 }
 

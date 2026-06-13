@@ -8,6 +8,14 @@ class UsuariosDB {
         return rows;
     };
 
+    obtenerPorId = async (id) => {
+        const [rows] = await pool.query(
+            'SELECT * FROM usuarios WHERE id_usuario = ? AND activo = 1',
+            [id]
+        );
+        return rows[0];
+    };
+
     crearUsuario = async (usuario) => {
         const {
             documento,
@@ -41,8 +49,8 @@ class UsuariosDB {
                 apellido,
                 email,
                 contrasenia,
-                foto_path,
-                rol,
+                foto_path || '',
+                rol || 2, // Por defecto rol paciente
                 activo || 1 // activo
             ]
         );

@@ -4,6 +4,7 @@ import morgan from 'morgan';
 import especialidadesRoutes from './src/routes/v1/especialidades.routes.js';
 import medicosRoutes from './src/routes/v1/medicos.routes.js';
 import usuariosRoutes from './src/routes/v1/usuarios.routes.js';
+import { errorHandler } from './src/middlewares/errorHandler.js';
 
 const app = express();
 app.use(morgan('dev'));
@@ -16,6 +17,9 @@ app.use('/api/v1/usuarios', usuariosRoutes);
 app.use((req, res) => {
     res.status(404).json({ estado: false, mensaje: 'Ruta no encontrada' });
 });
+
+// Middleware centralizado de manejo de errores (siempre va al final)
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 3000;
 
