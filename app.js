@@ -2,6 +2,7 @@
 import 'dotenv/config';
 import express from 'express';
 import cors from "cors";
+import helmet from "helmet";
 import morgan from 'morgan';
 import swaggerUi from "swagger-ui-express";
 import swaggerSpec from "./swagger.js";
@@ -14,8 +15,11 @@ import medicosObrasSocialesRouter from './src/routes/v1/medicos_obras_sociales.r
 import turnosReservaRouter from './src/routes/v1/turnos_reserva.routes.js';
 import authRoutes from './src/routes/v1/auth.routes.js';
 import estadisticasRoutes from './src/routes/v1/estadisticas.routes.js';
+import { errorHandler } from './src/middlewares/errorHandler.js';
 
 const app = express();
+app.use(helmet());
+app.use(cors({origin:"http://localhost:5173"}));
 app.use(morgan('dev'));
 app.use(express.json()); 
 
@@ -30,11 +34,11 @@ app.use('/api/v1/turnos-reserva', turnosReservaRouter);
 app.use('/api/v1/auth', authRoutes);
 app.use("/api/v1/estadisticas",estadisticasRoutes);
 
-app.use(cors({origin:"http://localhost:5173"}));
-
 app.use((req, res) => {
     res.status(404).json({ estado: false, mensaje: 'Ruta no encontrada' });
 });
+
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 3000;
 

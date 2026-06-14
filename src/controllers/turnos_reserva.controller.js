@@ -3,67 +3,41 @@ import turnos_reservaService from '../services/turnos_reserva.service.js';
 
 class TurnosReservaController {
     buscarTurnos = async (req, res) => {
-        try {
-            const turnos = await turnos_reservaService.buscarTurnos();
-            res.json(turnos);
-        }
-        catch (error) {
-            res.status(500).json({ message: 'Error al buscar los turnos', error });
-        }
+        const turnos = await turnos_reservaService.obtenerTurnos();
+        res.status(200).json({ estado: true, datos: turnos });
     };
 
     buscarTurnoPorId = async (req, res) => {
         const id = req.params.id;
-        try {
-            const turno = await turnos_reservaService.buscarTurnoPorId(id);
-            if (turno) {
-                res.json(turno);
-            } else {
-                res.status(404).json({ message: 'Turno no encontrado' });
-            }
-        } catch (error) {
-            res.status(500).json({ message: 'Error al buscar el turno', error });
+        const turno = await turnos_reservaService.obtenerTurnoPorId(id);
+        if (turno) {
+            res.status(200).json({ estado: true, datos: turno });
+        } else {
+            res.status(404).json({ estado: false, mensaje: 'Turno no encontrado' });
         }
     };
 
     crearTurno = async (req, res) => {
-        const { idMedico, idPaciente, idObrasocial, fecha_hora, valor_total, atendido } = req.body;
-        try {
-            const nuevoTurnoId = await turnos_reservaService.crearTurno(idMedico, idPaciente, idObrasocial, fecha_hora, valor_total, atendido);
-            res.status(201).json({ message: 'Turno creado', id: nuevoTurnoId });
-        } catch (error) {
-            res.status(500).json({ message: 'Error al crear el turno', error });
-        }
+        const nuevoTurno = await turnos_reservaService.crearTurno(req.body);
+        res.status(201).json({ estado: true, mensaje: 'Turno creado', datos: nuevoTurno });
     };
+
     actualizarTurno = async (req, res) => {
         const id = req.params.id;
-        const { fecha_hora, valor_total, atendido, activo } = req.body;
-        try {
-            await turnos_reservaService.actualizarTurno(id, fecha_hora, valor_total, atendido, activo);
-            res.json({ message: 'Turno actualizado' });
-        } catch (error) {
-            res.status(500).json({ message: 'Error al actualizar el turno', error });
-        }
+        await turnos_reservaService.actualizarTurno(id, req.body);
+        res.status(200).json({ estado: true, mensaje: 'Turno actualizado' });
     };
 
     atenderTurno = async (req, res) => {
         const id = req.params.id;
-        try {
-            await turnos_reservaService.atenderTurno(id);
-            res.json({ message: 'Turno atendido' });
-        } catch (error) {
-            res.status(500).json({ message: 'Error al atender el turno', error });
-        }
+        await turnos_reservaService.atenderTurno(id);
+        res.status(200).json({ estado: true, mensaje: 'Turno atendido' });
     };
 
     borrarTurno = async (req, res) => {
         const id = req.params.id;
-        try {
-            await turnos_reservaService.borrarTurno(id);
-            res.json({ message: 'Turno borrado' });
-        } catch (error) {
-            res.status(500).json({ message: 'Error al borrar el turno', error });
-        }
+        await turnos_reservaService.borrarTurno(id);
+        res.status(200).json({ estado: true, mensaje: 'Turno borrado (lógico)' });
     };
 }
 

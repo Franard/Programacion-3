@@ -3,39 +3,41 @@ import { pool } from './connection.js';
 class TurnosDB {
     async buscarTurnos() {
         const [rows] = await pool.query(
-            'SELECT * FROM turnos WHERE activo = 1'
+            'SELECT * FROM turnos_reservas WHERE activo = 1'
         );
         return rows;
     }
     async buscarTurnoPorId(id) {
         const [rows] = await pool.query(
-            'SELECT * FROM turnos WHERE id_turno = ? AND activo = 1',
+            'SELECT * FROM turnos_reservas WHERE id_turno_reserva = ? AND activo = 1',
             [id]
         );
         return rows[0];
     }
-    async crearTurno(idMedico, idPaciente, idObrasocial, fecha_hora, valor_total, atendido) {
+    async crearTurno(turno) {
+        const { id_medico, id_paciente, id_obra_social, fecha_hora, valor_total } = turno;
         const [result] = await pool.query(
-            'INSERT INTO turnos (id_Medico, id_Paciente, idObrasocial, fecha_hora, valor_total, atendido, activo) VALUES (?, ?, ?, ?, ?, 0, 1)',
-            [idMedico, idPaciente, idObrasocial, fecha_hora, valor_total, atendido]
+            'INSERT INTO turnos_reservas (id_medico, id_paciente, id_obra_social, fecha_hora, valor_total, atendido, activo) VALUES (?, ?, ?, ?, ?, 0, 1)',
+            [id_medico, id_paciente, id_obra_social, fecha_hora, valor_total]
         );
         return result.insertId;
     }
-    async actualizarTurno(idTurno, idMedico, idPaciente, idObrasocial, fecha_hora, valor_total, atendido) {
+    async actualizarTurno(idTurno, turno) {
+        const { id_medico, id_paciente, id_obra_social, fecha_hora, valor_total, atendido } = turno;
         await pool.query(
-            'UPDATE turnos SET id_Medico = ?, id_Paciente = ?, idObrasocial = ?, fecha_hora = ?, valor_total = ?, atendido = ? WHERE id_turno = ?',
-            [idTurno, idMedico, idPaciente, idObrasocial, fecha_hora, valor_total, atendido]
+            'UPDATE turnos_reservas SET id_medico = ?, id_paciente = ?, id_obra_social = ?, fecha_hora = ?, valor_total = ?, atendido = ? WHERE id_turno_reserva = ?',
+            [id_medico, id_paciente, id_obra_social, fecha_hora, valor_total, atendido, idTurno]
         );
     }
     async atender(id) {
         await pool.query(
-            'UPDATE turnos SET atendido = 1 WHERE id_turno = ?',
+            'UPDATE turnos_reservas SET atendido = 1 WHERE id_turno_reserva = ?',
             [id]
         );
     }
     async borrarTurno(id) {
         await pool.query(
-            'UPDATE turnos SET activo = 0 WHERE id_turno = ?',
+            'UPDATE turnos_reservas SET activo = 0 WHERE id_turno_reserva = ?',
             [id]
         );
     }
