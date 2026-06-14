@@ -17,7 +17,7 @@ class TurnosDB {
     async crearTurno(turno) {
         const { id_medico, id_paciente, id_obra_social, fecha_hora, valor_total } = turno;
         const [result] = await pool.query(
-            'INSERT INTO turnos_reservas (id_medico, id_paciente, id_obra_social, fecha_hora, valor_total, atendido, activo) VALUES (?, ?, ?, ?, ?, 0, 1)',
+            'INSERT INTO turnos_reservas (id_medico, id_paciente, id_obra_social, fecha_hora, valor_total, atentido, activo) VALUES (?, ?, ?, ?, ?, 0, 1)',
             [id_medico, id_paciente, id_obra_social, fecha_hora, valor_total]
         );
         return result.insertId;
@@ -25,13 +25,13 @@ class TurnosDB {
     async actualizarTurno(idTurno, turno) {
         const { id_medico, id_paciente, id_obra_social, fecha_hora, valor_total, atendido } = turno;
         await pool.query(
-            'UPDATE turnos_reservas SET id_medico = ?, id_paciente = ?, id_obra_social = ?, fecha_hora = ?, valor_total = ?, atendido = ? WHERE id_turno_reserva = ?',
+            'UPDATE turnos_reservas SET id_medico = ?, id_paciente = ?, id_obra_social = ?, fecha_hora = ?, valor_total = ?, atentido = ? WHERE id_turno_reserva = ?',
             [id_medico, id_paciente, id_obra_social, fecha_hora, valor_total, atendido, idTurno]
         );
     }
     async atender(id) {
         await pool.query(
-            'UPDATE turnos_reservas SET atendido = 1 WHERE id_turno_reserva = ?',
+            'UPDATE turnos_reservas SET atentido = 1 WHERE id_turno_reserva = ?',
             [id]
         );
     }

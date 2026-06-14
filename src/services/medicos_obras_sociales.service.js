@@ -2,24 +2,25 @@
 import MedicosObrasSocialesDB from '../db/medicos_obras_sociales.db.js';
 
 class MedicosObrasSocialesService {
-    buscarMOSPorId = async (id_MOS) => {
-        return await MedicosObrasSocialesDB.buscarMOSPorId(id_MOS);
+    buscarMOS = async () => {
+        return await MedicosObrasSocialesDB.buscarMOS();
+    };
+
+    buscarMOSPorIds = async (idMedico, idObraSocial) => {
+        return await MedicosObrasSocialesDB.buscarMOSPorIds(idMedico, idObraSocial);
     };
 
     crearMOS = async (idMedico, idObraSocial) => {
         return await MedicosObrasSocialesDB.crearMOS(idMedico, idObraSocial);
     };
 
-    actualizarMOS = async (id_MOS, idObraSocial, activo) => {
-        return await MedicosObrasSocialesDB.actualizarMOS(id_MOS, idObraSocial, activo);
+    actualizarMOS = async (idMedico, idObraSocialVieja, idObraSocialNueva, activo) => {
+        return await MedicosObrasSocialesDB.actualizarMOS(idMedico, idObraSocialVieja, idObraSocialNueva, activo);
     };
 
-    borrarMOS = async (id_MOS) => {
-        return await MedicosObrasSocialesDB.borrarMOS(id_MOS);
+    borrarMOS = async (idMedico, idObraSocial) => {
+        return await MedicosObrasSocialesDB.eliminarMOS(idMedico, idObraSocial);
     };
-    actualizarMOS = async (id_MOS, idObraSocial, activo) => {
-        return await MedicosObrasSocialesDB.actualizarMOS(id_MOS, idObraSocial, activo);
-    }
 }
 
 export default new MedicosObrasSocialesService();

@@ -21,7 +21,7 @@ class AuthService {
         const passwordCorrecta =
             await bcrypt.compare(
                 password,
-                usuario.contraseña
+                usuario.contrasenia
             );
 
 

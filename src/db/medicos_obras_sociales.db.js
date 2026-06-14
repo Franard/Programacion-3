@@ -2,44 +2,40 @@
 import { pool } from './connection.js';
 
 class MedicosObrasSocialesDB {
-    async buscarMOSPorId(id_MOS) {
+    async buscarMOS() {
         const [rows] = await pool.query(
-            'SELECT * FROM medicos_obras_sociales WHERE id_MOS = ? AND activo = 1',
-            [id_MOS]
+            'SELECT * FROM medicos_obras_sociales WHERE activo = 1'
+        );
+        return rows;
+    }
+
+    async buscarMOSPorIds(idMedico, idObraSocial) {
+        const [rows] = await pool.query(
+            'SELECT * FROM medicos_obras_sociales WHERE id_medico = ? AND id_obra_social = ? AND activo = 1',
+            [idMedico, idObraSocial]
         );
         return rows[0];
     }
 
     async crearMOS(idMedico, idObraSocial) {
-
-        const conn = await pool.getConnection();
-        await conn.beginTransaction();
-        try {
-            const [resultado] = await conn.query(
-                'INSERT INTO medicos_obras_sociales (id_medico, id_obra_social, activo) VALUES (?, ?, 1)',
-                [idMedico, idObraSocial]
-            );
-            await conn.commit();
-            return resultado.insertId;
-        } catch (error) {
-            await conn.rollback();
-            throw error;
-        } finally {
-            conn.release();
-        }
+        const [resultado] = await pool.query(
+            'INSERT INTO medicos_obras_sociales (id_medico, id_obra_social, activo) VALUES (?, ?, 1)',
+            [idMedico, idObraSocial]
+        );
+        return resultado.affectedRows;
     }
 
-    async eliminarMOS(id_MOS, idObraSocial) {
+    async eliminarMOS(idMedico, idObraSocial) {
         await pool.query(
-            'UPDATE medicos_obras_sociales SET activo = 0 WHERE id = ? AND id_obra_social = ?',
-            [id_MOS, idObraSocial]
+            'UPDATE medicos_obras_sociales SET activo = 0 WHERE id_medico = ? AND id_obra_social = ?',
+            [idMedico, idObraSocial]
         );
     }
 
-    async actualizarMOS(id_MOS, idObraSocial, activo) {
+    async actualizarMOS(idMedico, idObraSocialVieja, idObraSocialNueva, activo) {
         await pool.query(
-            'UPDATE medicos_obras_sociales SET activo = ? WHERE id = ? AND id_obra_social = ?',
-            [activo, id_MOS, idObraSocial]
+            'UPDATE medicos_obras_sociales SET activo = ?, id_obra_social = ? WHERE id_medico = ? AND id_obra_social = ?',
+            [activo, idObraSocialNueva, idMedico, idObraSocialVieja]
         );
     }
 }

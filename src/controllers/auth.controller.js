@@ -2,8 +2,9 @@
 
 
 
-class AuthController {
+import AuthService from '../services/auth.service.js';
 
+class AuthController {
 
 login = async(req,res)=>{
 
@@ -13,7 +14,7 @@ login = async(req,res)=>{
 
 
         const resultado =
-            await AuthController.login(
+            await AuthService.login(
                 email,
                 password
             );

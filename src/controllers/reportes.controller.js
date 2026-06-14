@@ -5,10 +5,8 @@ import ReportesService from "../services/reportes.service.js";
 class ReportesController{
 
     pdf = async(req,res)=>{
-        const datos =
-        await EstadisticasService.obtener();
-        const pdf =
-        ReportesService.generarPDF(datos[0]);
+        const datos = await EstadisticasService.obtener();
+        const pdf = ReportesService.generarPDF(datos);
         res.setHeader(
         "Content-Type",
         "application/pdf"

@@ -15,6 +15,7 @@ import medicosObrasSocialesRouter from './src/routes/v1/medicos_obras_sociales.r
 import turnosReservaRouter from './src/routes/v1/turnos_reserva.routes.js';
 import authRoutes from './src/routes/v1/auth.routes.js';
 import estadisticasRoutes from './src/routes/v1/estadisticas.routes.js';
+import reportesRoutes from './src/routes/v1/reportes.routes.js';
 import { errorHandler } from './src/middlewares/errorHandler.js';
 
 const app = express();
@@ -33,6 +34,7 @@ app.use('/api/v1/medicos-obras-sociales', medicosObrasSocialesRouter);
 app.use('/api/v1/turnos-reserva', turnosReservaRouter);
 app.use('/api/v1/auth', authRoutes);
 app.use("/api/v1/estadisticas",estadisticasRoutes);
+app.use("/api/v1/reportes", reportesRoutes);
 
 app.use((req, res) => {
     res.status(404).json({ estado: false, mensaje: 'Ruta no encontrada' });
@@ -44,4 +46,4 @@ const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en http://localhost:${PORT}`);
-});
+});

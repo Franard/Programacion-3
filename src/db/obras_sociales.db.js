@@ -10,7 +10,7 @@ class ObrasSocialesDB {
     }
     async buscarOSPorId(id) {
         const [rows] = await pool.query(
-            'SELECT * FROM obras_sociales WHERE idObraSocial = ? AND activo = 1',
+            'SELECT * FROM obras_sociales WHERE id_obra_social = ? AND activo = 1',
             [id]
         );
         return rows[0];
@@ -24,7 +24,7 @@ class ObrasSocialesDB {
     }
     async actualizarOS(id, nombre, descripcion, porcentaje, es_particular, activo) {
         await pool.query(
-            'UPDATE obras_sociales SET nombre = ?, descripcion = ?, porcentaje = ?, es_particular = ?, activo = ? WHERE idObraSocial = ?',
+            'UPDATE obras_sociales SET nombre = ?, descripcion = ?, porcentaje = ?, es_particular = ?, activo = ? WHERE id_obra_social = ?',
             [nombre, descripcion, porcentaje, es_particular, activo, id]
         );
     }

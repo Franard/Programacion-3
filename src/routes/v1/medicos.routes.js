@@ -9,12 +9,145 @@ import TurnosreservaController from '../../controllers/turnos_reserva.controller
 const router = Router();
 
 // Rutas del BREAD para Médicos
+
+/**
+ * @swagger
+ * /api/v1/medicos:
+ *   get:
+ *     summary: Operación GET para Medicos
+ *     tags: [Medicos]
+ *     responses:
+ *       200:
+ *         description: Éxito
+ *       400:
+ *         description: Error de validación
+ *       401:
+ *         description: No autorizado
+ *       404:
+ *         description: No encontrado
+ *       500:
+ *         description: Error del servidor
+ */
 router.get('/', MedicosController.obtenerTodos);           
+
+/**
+ * @swagger
+ * /api/v1/medicos/{id}:
+ *   get:
+ *     summary: Operación GET para Medicos
+ *     tags: [Medicos]
+ *     responses:
+ *       200:
+ *         description: Éxito
+ *       400:
+ *         description: Error de validación
+ *       401:
+ *         description: No autorizado
+ *       404:
+ *         description: No encontrado
+ *       500:
+ *         description: Error del servidor
+ */
 router.get('/:id', MedicosController.obtenerPorId);        
+
+/**
+ * @swagger
+ * /api/v1/medicos:
+ *   post:
+ *     summary: Operación POST para Medicos
+ *     tags: [Medicos]
+ *     responses:
+ *       200:
+ *         description: Éxito
+ *       400:
+ *         description: Error de validación
+ *       401:
+ *         description: No autorizado
+ *       404:
+ *         description: No encontrado
+ *       500:
+ *         description: Error del servidor
+ */
 router.post('/', validarMedico, MedicosController.crear);  
+
+/**
+ * @swagger
+ * /api/v1/medicos/{id}:
+ *   put:
+ *     summary: Operación PUT para Medicos
+ *     tags: [Medicos]
+ *     responses:
+ *       200:
+ *         description: Éxito
+ *       400:
+ *         description: Error de validación
+ *       401:
+ *         description: No autorizado
+ *       404:
+ *         description: No encontrado
+ *       500:
+ *         description: Error del servidor
+ */
 router.put('/:id', validarMedico, MedicosController.actualizar); 
+
+/**
+ * @swagger
+ * /api/v1/medicos/{id}:
+ *   delete:
+ *     summary: Operación DELETE para Medicos
+ *     tags: [Medicos]
+ *     responses:
+ *       200:
+ *         description: Éxito
+ *       400:
+ *         description: Error de validación
+ *       401:
+ *         description: No autorizado
+ *       404:
+ *         description: No encontrado
+ *       500:
+ *         description: Error del servidor
+ */
 router.delete('/:id', MedicosController.borrar);
+
+/**
+ * @swagger
+ * /api/v1/medicos/turnos:
+ *   get:
+ *     summary: Operación GET para Medicos
+ *     tags: [Medicos]
+ *     responses:
+ *       200:
+ *         description: Éxito
+ *       400:
+ *         description: Error de validación
+ *       401:
+ *         description: No autorizado
+ *       404:
+ *         description: No encontrado
+ *       500:
+ *         description: Error del servidor
+ */
 router.get("/turnos",verificarToken,permitirRoles(1),TurnosreservaController.buscarTurnos);
+
+/**
+ * @swagger
+ * /api/v1/medicos/turnos/{id}/atendido:
+ *   put:
+ *     summary: Operación PUT para Medicos
+ *     tags: [Medicos]
+ *     responses:
+ *       200:
+ *         description: Éxito
+ *       400:
+ *         description: Error de validación
+ *       401:
+ *         description: No autorizado
+ *       404:
+ *         description: No encontrado
+ *       500:
+ *         description: Error del servidor
+ */
 router.put("/turnos/:id/atendido",verificarToken,permitirRoles(1),TurnosreservaController.atenderTurno);         
 
 export default router;

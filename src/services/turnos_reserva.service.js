@@ -18,7 +18,7 @@ class TurnosService {
             throw error;
         }
 
-        const obra = await ObrasSocialesDB.obtenerObraSocialPorId(turno.id_obra_social);
+        const obra = await ObrasSocialesDB.buscarOSPorId(turno.id_obra_social);
         if (!obra) {
             const error = new Error('Obra social no encontrada o inactiva');
             error.status = 404;

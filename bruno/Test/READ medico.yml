@@ -1,11 +1,11 @@
 info:
-  name: Browse especialidades
+  name: READ medico
   type: http
   seq: 1
 
 http:
   method: GET
-  url: http://localhost:3000/api/v1/especialidades
+  url: http://localhost:3000/api/v1/medicos/
   auth: inherit
 
 settings:
@@ -13,4 +13,3 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
-​

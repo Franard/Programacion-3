@@ -7,10 +7,10 @@ import medicosObrasSocialesController from '../../controllers/medicos_obras_soci
 const medicosObrasSocialesRouter = Router();
 
 medicosObrasSocialesRouter.get('/', medicosObrasSocialesController.buscarMOS);
-medicosObrasSocialesRouter.get('/:id', medicosObrasSocialesController.buscarMOSPorId);
+medicosObrasSocialesRouter.get('/:idMedico/:idObraSocial', medicosObrasSocialesController.buscarMOSPorIds);
 medicosObrasSocialesRouter.post('/', validarMedicosObrasSociales, medicosObrasSocialesController.crearMOS);
-medicosObrasSocialesRouter.put('/:id', validarMedicosObrasSociales, medicosObrasSocialesController.actualizarMOS);
-medicosObrasSocialesRouter.delete('/:id', medicosObrasSocialesController.borrarMOS);
+medicosObrasSocialesRouter.put('/:idMedico/:idObraSocialVieja', validarMedicosObrasSociales, medicosObrasSocialesController.actualizarMOS);
+medicosObrasSocialesRouter.delete('/:idMedico/:idObraSocial', medicosObrasSocialesController.borrarMOS);
 
 export default medicosObrasSocialesRouter;
 
