@@ -1,0 +1,23 @@
+info:
+  name: EDIT turno
+  type: http
+
+http:
+  method: PUT
+  url: http://localhost:3000/api/v1/turnos-reserva/1
+  body:
+    type: json
+    data: |
+      {
+        "id_paciente": 1,
+        "id_medico": 1,
+        "id_obra_social": 1,
+        "fecha_hora": "2026-06-21T11:00:00Z"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

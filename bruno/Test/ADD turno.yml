@@ -1,0 +1,23 @@
+info:
+  name: ADD turno
+  type: http
+
+http:
+  method: POST
+  url: http://localhost:3000/api/v1/turnos-reserva
+  body:
+    type: json
+    data: |
+      {
+        "id_paciente": 1,
+        "id_medico": 1,
+        "id_obra_social": 1,
+        "fecha_hora": "2026-06-20T10:30:00Z"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

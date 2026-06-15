@@ -11,7 +11,7 @@ export const validarMedico = [
     
     check('matricula')
         .notEmpty().withMessage('La matrícula es obligatoria')
-        .isString().withMessage('La matrícula debe ser un texto'),
+        .isString().withMessage('La matrícula debe ser un texto').escape(),
     
     check('valor_consulta')
         .notEmpty().withMessage('El valor de la consulta es obligatorio')

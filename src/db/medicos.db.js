@@ -1,7 +1,8 @@
+
 import { pool } from './connection.js';
 
 class MedicosDB {
-    // Browse join con usuarios y especialidades
+    // Obtener todos (Browse)
     obtenerTodos = async () => {
         const [resultado] = await pool.query(
             `SELECT m.id_medico, m.matricula, m.descripcion, m.valor_consulta, 
@@ -15,7 +16,7 @@ class MedicosDB {
         return resultado;
     };
 
-    //  Read 
+    // Obtener por ID
     obtenerPorId = async (id) => {
         const [resultado] = await pool.query(
             `SELECT m.*, u.nombres, u.apellido, u.documento 
@@ -27,7 +28,7 @@ class MedicosDB {
         return resultado[0];
     };
 
-    //Add
+    // Agregar
     crear = async (medico) => {
         const [resultado] = await pool.query(
             'INSERT INTO medicos (id_usuario, id_especialidad, matricula, descripcion, valor_consulta) VALUES (?, ?, ?, ?, ?)',
@@ -36,7 +37,7 @@ class MedicosDB {
         return resultado.insertId;
     };
 
-    // Edit
+    // Editar
     actualizar = async (id, medico) => {
         const [resultado] = await pool.query(
             'UPDATE medicos SET id_usuario = ?, id_especialidad = ?, matricula = ?, descripcion = ?, valor_consulta = ? WHERE id_medico = ?',
@@ -45,12 +46,14 @@ class MedicosDB {
         return resultado.affectedRows;
     };
 
-    //Delete, descantivando usuario
+    // Baja lógica
     borrar = async (id) => {
-        const [medico] = await pool.query('SELECT id_usuario FROM medicos WHERE id_medico = ?', [id]);
-        
-        if (medico.length === 0) return 0; 
-       
+        const [medico] = await pool.query(
+            'SELECT id_usuario FROM medicos WHERE id_medico = ?',
+            [id]
+        );
+        if (medico.length === 0)
+            return 0;
         const [resultado] = await pool.query(
             'UPDATE usuarios SET activo = 0 WHERE id_usuario = ?',
             [medico[0].id_usuario]
