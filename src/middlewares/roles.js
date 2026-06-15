@@ -1,4 +1,4 @@
-// Código de Angel C.
+
 export const permitirRoles = (...roles)=>{
 
     return (req,res,next)=>{

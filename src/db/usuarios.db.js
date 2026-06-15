@@ -1,4 +1,4 @@
-// Código de Angel C.
+
 import { pool } from './connection.js';
 
 class UsuariosDB {

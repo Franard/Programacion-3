@@ -1,4 +1,4 @@
-// Código de Angel C.
+
 import { check, validationResult } from 'express-validator';
 
 export const validarUsuario = [

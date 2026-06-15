@@ -1,4 +1,4 @@
-// Código de Angel C.
+
 import EstadisticasDB from "../db/estadisticas.db.js";
 
 

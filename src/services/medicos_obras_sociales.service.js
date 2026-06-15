@@ -1,4 +1,4 @@
-// Código de Angel C.
+
 import MedicosObrasSocialesDB from '../db/medicos_obras_sociales.db.js';
 
 import { pool } from '../db/connection.js';

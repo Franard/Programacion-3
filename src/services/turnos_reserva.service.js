@@ -1,4 +1,4 @@
-// Código de Angel C.
+
 import turnosDB from '../db/turnos_reserva.db.js';
 import MedicosDB from '../db/medicos.db.js';
 import ObrasSocialesDB from '../db/obras_sociales.db.js';

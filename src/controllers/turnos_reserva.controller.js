@@ -1,4 +1,4 @@
-// Código de Angel C.
+
 import turnos_reservaService from '../services/turnos_reserva.service.js';
 
 class TurnosReservaController {

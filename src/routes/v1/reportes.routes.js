@@ -1,4 +1,4 @@
-// Código de Angel C.
+
 import { Router } from 'express';
 import ReportesController from '../../controllers/reportes.controller.js';
 import { verificarToken } from '../../middlewares/auth.js';

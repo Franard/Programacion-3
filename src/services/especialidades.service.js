@@ -1,4 +1,4 @@
-// Código de Angel C.
+
 import EspecialidadesDB from '../db/especialidades.db.js';
 
 export default class EspecialidadesService {

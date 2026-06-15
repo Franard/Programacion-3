@@ -1,4 +1,4 @@
-// Código de Angel C.
+
 import PacientesDB from '../db/pacientes.db.js';
 
 class PacientesService {

@@ -1,4 +1,4 @@
-// Código de Angel C.
+
 import PDFDocument from "pdfkit";
 
 

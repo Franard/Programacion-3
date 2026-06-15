@@ -1,4 +1,4 @@
-// Código de Angel C.
+
 import { Router } from 'express';
 import UsuariosController from '../../controllers/usuarios.controller.js';
 import { validarUsuario } from '../../middlewares/usuarios.validator.js';

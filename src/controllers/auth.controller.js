@@ -1,4 +1,4 @@
-// Código de Angel C.
+
 import AuthService from '../services/auth.service.js';
 
 class AuthController {

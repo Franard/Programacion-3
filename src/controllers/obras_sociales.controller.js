@@ -1,4 +1,4 @@
-// Código de Angel C.
+
 import obrasSocialesService from '../services/obras_sociales.service.js';
 class ObrasSocialesController {
     buscarOS = async (req, res) => {

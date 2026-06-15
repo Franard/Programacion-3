@@ -1,4 +1,4 @@
-// Código de Angel C.
+
 import EstadisticasService from "../services/estadisticas.service.js";
 import ReportesService from "../services/reportes.service.js";
 

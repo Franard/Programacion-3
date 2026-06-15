@@ -1,4 +1,4 @@
-// Código de Angel C.
+
 import { check, validationResult  } from 'express-validator';
 export const validarMedicosObrasSociales = [
     check('idMedico').isInt().withMessage('El id del médico debe ser un número entero'),

@@ -1,4 +1,4 @@
-// Código de Angel C.
+
 import pasientesService from '../services/pacientes.service.js';
 class PacientesController {
     buscarPacientes = async (req, res) => {

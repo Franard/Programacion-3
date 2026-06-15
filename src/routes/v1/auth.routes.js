@@ -1,4 +1,4 @@
-// Código de Angel C.
+
 import {Router} from "express";
 import AuthController from '../../controllers/auth.controller.js';
 import upload from "../../middlewares/upload.js";

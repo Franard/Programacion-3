@@ -1,4 +1,4 @@
-// Código de Angel C.
+
 import 'dotenv/config';
 import express from 'express';
 import cors from "cors";

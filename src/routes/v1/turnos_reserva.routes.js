@@ -1,4 +1,4 @@
-// Código de Angel C.
+
 import {Router} from 'express';
 import {validarTurnosReservas} from '../../middlewares/turnos_reserva.validator.js';
 import turnosReservaController from '../../controllers/turnos_reserva.controller.js';

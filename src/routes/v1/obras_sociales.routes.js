@@ -1,4 +1,4 @@
-// Código de Angel C.
+
 import {Router} from 'express';
 import {validarObrasSociales} from '../../middlewares/obras_sociales.validator.js';
 import obrasSocialesController from '../../controllers/obras_sociales.controller.js';

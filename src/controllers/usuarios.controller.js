@@ -1,4 +1,4 @@
-// Código de Angel C.
+
 import UsuariosService from '../services/usuarios.service.js';
 
 class UsuariosController {

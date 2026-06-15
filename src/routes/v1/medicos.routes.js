@@ -1,4 +1,4 @@
-// Código de Angel C.
+
 import { Router } from 'express';
 import MedicosController from '../../controllers/medicos.controller.js';
 import { validarMedico } from '../../middlewares/medicos.validator.js';

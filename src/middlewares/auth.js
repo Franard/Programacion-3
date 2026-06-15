@@ -1,4 +1,4 @@
-// Código de Angel C.
+
 import jwt from "jsonwebtoken";
 
 

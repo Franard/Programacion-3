@@ -1,4 +1,4 @@
-// Código de Angel C.
+
 import obrasSocialesDB from '../db/obras_sociales.db.js';
 
 class ObrasSocialesService {

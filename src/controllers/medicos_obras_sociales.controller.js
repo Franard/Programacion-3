@@ -1,4 +1,4 @@
-// Código de Angel C.
+
 import medicosOS from '../services/medicos_obras_sociales.service.js';
 class MedicosObrasSocialesController {
     
