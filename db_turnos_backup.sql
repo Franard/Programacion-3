@@ -1,3 +1,6 @@
+CREATE DATABASE IF NOT EXISTS `prog3_turnos`;
+USE `prog3_turnos`;
+
 -- MariaDB dump 10.19  Distrib 10.4.27-MariaDB, for Win64 (AMD64)
 --
 -- Host: localhost    Database: prog3_turnos
