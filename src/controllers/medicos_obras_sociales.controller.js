@@ -7,7 +7,7 @@ class MedicosObrasSocialesController {
             const medicosOSList = await medicosOS.buscarMOS();
             res.json(medicosOSList);
         } catch (error) {
-            res.status(500).json({ message: 'Error al buscar los medicos-obras sociales', error });
+            throw error;
         }
     };
     
@@ -21,7 +21,7 @@ class MedicosObrasSocialesController {
                 res.status(404).json({ message: 'Medico-Obra Social no encontrado' });
             }
         } catch (error) {
-            res.status(500).json({ message: 'Error al buscar el medico-obra social', error });
+            throw error;
         }
     };
 
@@ -31,7 +31,7 @@ class MedicosObrasSocialesController {
             await medicosOS.crearMOS(idMedico, idObraSocial);
             res.status(201).json({ message: 'Medico-Obra Social creado' });
         } catch (error) {
-            res.status(500).json({ message: 'Error al crear el medico-obra social', error });
+            throw error;
         }
     };
 
@@ -42,7 +42,7 @@ class MedicosObrasSocialesController {
             await medicosOS.actualizarMOS(idMedico, idObraSocialVieja, idObraSocial, activo);
             res.json({ message: 'Medico-Obra Social actualizado' });
         } catch (error) {
-            res.status(500).json({ message: 'Error al actualizar el medico-obra social', error });
+            throw error;
         }
     };
 
@@ -52,7 +52,7 @@ class MedicosObrasSocialesController {
             await medicosOS.borrarMOS(idMedico, idObraSocial);
             res.json({ message: 'Medico-Obra Social borrado' });
         } catch (error) {
-            res.status(500).json({ message: 'Error al borrar el medico-obra social', error });
+            throw error;
         }
     };
 }

@@ -8,11 +8,11 @@ class UsuariosController {
             try {
                 const usuario = await UsuariosService.obtenerUsuarioPorId(id);
                 if (!usuario) {
-                    return res.status(404).json({ estado: false, mensaje: 'Usuario no encontrado o inactivo' });
+                    return res.status(404).json({ message: 'Usuario no encontrado o inactivo' });
                 }
-                res.status(200).json({ estado: true, datos: usuario });
+                res.status(200).json(usuario);
             } catch (error) {
-                res.status(500).json({ estado: false, mensaje: 'Error al obtener el usuario', error: error.message });
+            throw error;
             }
         };
 
@@ -20,10 +20,10 @@ class UsuariosController {
         try {
             const usuarios = await UsuariosService.obtenerTodos();
             
-            res.status(200).json({ estado: true, datos: usuarios });
+            res.status(200).json(usuarios);
         } catch (error) {
-            console.log(error);
-            res.status(500).json({ estado: false, mensaje: 'Error al obtener usuarios', error: error.message });
+
+            throw error;
         }
     };
 
@@ -37,8 +37,8 @@ class UsuariosController {
                 id: nuevoId 
             });
         } catch (error) {
-            console.log(error);
-            res.status(500).json({ estado: false, mensaje: 'Error al crear usuario', error: error.message });
+
+            throw error;
         }
     };
     actualizarUsuario = async (req, res) => {
@@ -48,13 +48,13 @@ class UsuariosController {
                 // Primero verificamos si existe
                 const existe = await UsuariosService.obtenerUsuarioPorId(id);
                 if (!existe) {
-                    return res.status(404).json({ estado: false, mensaje: 'Usuario no encontrado para actualizar' });
+                    return res.status(404).json({ message: 'Usuario no encontrado para actualizar' });
                 }
 
                 await UsuariosService.actualizar(id, usuarioData);
-                res.status(200).json({ estado: true, mensaje: 'Usuario actualizado con éxito' });
+                res.status(200).json({ message: 'Usuario actualizado con éxito' });
             } catch (error) {
-                res.status(500).json({ estado: false, mensaje: 'Error al actualizar usuario', error: error.message });
+            throw error;
             }
     };
 
@@ -64,13 +64,13 @@ class UsuariosController {
         try {
             const existe = await UsuariosService.obtenerUsuarioPorId(id);
             if (!existe) {
-                return res.status(404).json({ estado: false, mensaje: 'Usuario no encontrado' });
+                return res.status(404).json({ message: 'Usuario no encontrado' });
             }
 
             await UsuariosService.borrar(id);
-            res.status(200).json({ estado: true, mensaje: 'Usuario eliminado (borrado lógico) con éxito' });
+            res.status(200).json({ message: 'Usuario eliminado (borrado lógico) con éxito' });
         } catch (error) {
-            res.status(500).json({ estado: false, mensaje: 'Error al borrar usuario', error: error.message });
+            throw error;
         }
     };
 }

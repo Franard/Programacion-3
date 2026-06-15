@@ -6,7 +6,7 @@ class PacientesController {
             const pacientes = await pasientesService.buscarPacientes();
             res.json(pacientes);
         } catch (error) {
-            res.status(500).json({ message: 'Error al buscar los pacientes', error });
+            throw error;
         }
     };
     buscarPacientePorId = async (req, res) => {
@@ -19,7 +19,7 @@ class PacientesController {
                 res.status(404).json({ message: 'Paciente no encontrado' });
             }
         } catch (error) {
-            res.status(500).json({ message: 'Error al buscar el paciente', error });
+            throw error;
         }
     };
     crearPaciente = async (req, res) => {
@@ -28,7 +28,7 @@ class PacientesController {
             const nuevoPacienteId = await pasientesService.crearPaciente(idUsuario, idObraSocial);
             res.status(201).json({ message: 'Paciente creado', id: nuevoPacienteId });
         } catch (error) {
-            res.status(500).json({ message: 'Error al crear el paciente', error });
+            throw error;
         }
     };
     actualizarPaciente = async (req, res) => {
@@ -38,7 +38,7 @@ class PacientesController {
             await pasientesService.actualizarPaciente(idPaciente, idUsuario, idObraSocial);
             res.json({ message: 'Paciente actualizado' });
         } catch (error) {
-            res.status(500).json({ message: 'Error al actualizar el paciente', error });
+            throw error;
         }
     };
     borrarPaciente = async (req, res) => {
@@ -47,7 +47,7 @@ class PacientesController {
             await pasientesService.borrarPaciente(id);
             res.json({ message: 'Paciente borrado' });
         } catch (error) {
-            res.status(500).json({ message: 'Error al borrar el paciente', error });
+            throw error;
         }
     };
 }

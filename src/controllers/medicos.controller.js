@@ -5,14 +5,14 @@ class MedicosController {
     // GET
     obtenerTodos = async (req, res) => {
         const medicos = await MedicosService.obtenerTodos();
-        res.status(200).json({ estado: true, datos: medicos });
+        res.status(200).json(medicos);
     };
 
     // GET
     obtenerPorId = async (req, res) => {
         const { id } = req.params;
         const medico = await MedicosService.obtenerPorId(id);
-        res.status(200).json({ estado: true, datos: medico });
+        res.status(200).json(medico);
     };
 
     // POST 
@@ -28,7 +28,7 @@ class MedicosController {
         const medicoData = req.body;
         
         await MedicosService.actualizar(id, medicoData);
-        res.status(200).json({ estado: true, mensaje: 'Médico actualizado con éxito' });
+        res.status(200).json({ message: 'Médico actualizado con éxito' });
     };
 
     // DELETE 
@@ -36,7 +36,7 @@ class MedicosController {
         const { id } = req.params;
         
         await MedicosService.borrar(id);
-        res.status(200).json({ estado: true, mensaje: 'Médico eliminado (borrado lógico) con éxito' });
+        res.status(200).json({ message: 'Médico eliminado (borrado lógico) con éxito' });
     };
 }
 

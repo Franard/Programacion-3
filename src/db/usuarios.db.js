@@ -4,7 +4,7 @@ import { pool } from './connection.js';
 class UsuariosDB {
     obtenerTodosLosUsuarios = async () => {
         const [resultado] = await pool.query(
-            `SELECT id_usuario, documento, nombres, apellido, email, contrasenia, foto_path, rol, activo
+            `SELECT id_usuario, documento, nombres, apellido, email, foto_path, rol, activo
              FROM usuarios
              WHERE activo = 1`
         );
@@ -13,7 +13,7 @@ class UsuariosDB {
 
     obtenerUsuarioPorId = async (id) => {
         const [resultado] = await pool.query(
-            `SELECT id_usuario, documento, nombres, apellido, email, contrasenia, foto_path, rol, activo
+            `SELECT id_usuario, documento, nombres, apellido, email, foto_path, rol, activo
              FROM usuarios
              WHERE id_usuario = ? AND activo = 1`,
             [id]
@@ -30,17 +30,21 @@ class UsuariosDB {
     };
 
     crearUsuario = async (usuario) => {
+        const params = [usuario.documento, usuario.apellido, usuario.nombres, usuario.email, usuario.contrasenia, usuario.foto_path, usuario.rol, usuario.activo]
+            .map(v => v === undefined ? null : v);
         const [resultado] = await pool.query(
             'INSERT INTO usuarios (documento, apellido, nombres, email, contrasenia, foto_path, rol, activo) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-            [usuario.documento, usuario.apellido, usuario.nombres, usuario.email, usuario.contrasenia, usuario.foto_path, usuario.rol, usuario.activo]
+            params
         );
         return resultado.insertId;
     };
 
     actualizarUsuario = async (id, usuario) => {
+        const params = [usuario.documento, usuario.apellido, usuario.nombres, usuario.email, usuario.contrasenia, usuario.foto_path, usuario.rol, usuario.activo, id]
+            .map(v => v === undefined ? null : v);
         const [resultado] = await pool.query(
             'UPDATE usuarios SET documento = ?, apellido = ?, nombres = ?, email = ?, contrasenia = ?, foto_path = ?, rol = ?, activo = ? WHERE id_usuario = ?',
-            [usuario.documento, usuario.apellido, usuario.nombres, usuario.email, usuario.contrasenia, usuario.foto_path, usuario.rol, usuario.activo, id]
+            params
         );
         return resultado.affectedRows;
     };

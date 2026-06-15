@@ -4,12 +4,12 @@ import { check, validationResult  } from "express-validator";
 export const validarObrasSociales = [
     check('nombre')
         .notEmpty().withMessage('El nombre de la obra social es obligatorio')
-        .isString().withMessage('El nombre debe ser texto')
+        .isString().withMessage('El nombre debe ser texto').escape()
         .isLength({ min: 3 }).withMessage('El nombre debe tener al menos 3 caracteres'),
 
     check('descripcion')
         .optional()
-        .isString().withMessage('La descripción debe ser texto'),
+        .isString().withMessage('La descripción debe ser texto').escape(),
 
     check('porcentaje')
         .notEmpty().withMessage('El porcentaje es obligatorio')
@@ -23,7 +23,7 @@ export const validarObrasSociales = [
         .notEmpty().withMessage('El campo activo es obligatorio')
         .isBoolean().withMessage('El campo activo debe ser un valor booleano'),
         
-    // Middleware que atrapa errores
+    // Atrapa errores de validación
     (req, res, next) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {

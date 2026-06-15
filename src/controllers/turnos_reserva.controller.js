@@ -4,16 +4,16 @@ import turnos_reservaService from '../services/turnos_reserva.service.js';
 class TurnosReservaController {
     buscarTurnos = async (req, res) => {
         const turnos = await turnos_reservaService.obtenerTurnos();
-        res.status(200).json({ estado: true, datos: turnos });
+        res.status(200).json(turnos);
     };
 
     buscarTurnoPorId = async (req, res) => {
         const id = req.params.id;
         const turno = await turnos_reservaService.obtenerTurnoPorId(id);
         if (turno) {
-            res.status(200).json({ estado: true, datos: turno });
+            res.status(200).json(turno);
         } else {
-            res.status(404).json({ estado: false, mensaje: 'Turno no encontrado' });
+            res.status(404).json({ message: 'Turno no encontrado' });
         }
     };
 
@@ -25,19 +25,19 @@ class TurnosReservaController {
     actualizarTurno = async (req, res) => {
         const id = req.params.id;
         await turnos_reservaService.actualizarTurno(id, req.body);
-        res.status(200).json({ estado: true, mensaje: 'Turno actualizado' });
+        res.status(200).json({ message: 'Turno actualizado' });
     };
 
     atenderTurno = async (req, res) => {
         const id = req.params.id;
         await turnos_reservaService.atenderTurno(id);
-        res.status(200).json({ estado: true, mensaje: 'Turno atendido' });
+        res.status(200).json({ message: 'Turno atendido' });
     };
 
     borrarTurno = async (req, res) => {
         const id = req.params.id;
         await turnos_reservaService.borrarTurno(id);
-        res.status(200).json({ estado: true, mensaje: 'Turno borrado (lógico)' });
+        res.status(200).json({ message: 'Turno borrado (lógico)' });
     };
 }
 

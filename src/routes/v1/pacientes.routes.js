@@ -27,7 +27,7 @@ const router = Router();
  *       500:
  *         description: Error del servidor
  */
-router.get('/',PacientesController.buscarPacientes);
+router.get('/', verificarToken, permitirRoles(1, 2, 3), PacientesController.buscarPacientes);
 
 /**
  * @swagger
@@ -47,7 +47,7 @@ router.get('/',PacientesController.buscarPacientes);
  *       500:
  *         description: Error del servidor
  */
-router.get('/:id',PacientesController.buscarPacientePorId);
+router.get('/:id', verificarToken, permitirRoles(1, 2, 3), PacientesController.buscarPacientePorId);
 
 /**
  * @swagger
@@ -67,7 +67,7 @@ router.get('/:id',PacientesController.buscarPacientePorId);
  *       500:
  *         description: Error del servidor
  */
-router.post('/',validarPacientes,PacientesController.crearPaciente);
+router.post('/', verificarToken, permitirRoles(3), validarPacientes, PacientesController.crearPaciente);
 
 /**
  * @swagger
@@ -87,7 +87,7 @@ router.post('/',validarPacientes,PacientesController.crearPaciente);
  *       500:
  *         description: Error del servidor
  */
-router.put('/:id',validarPacientes,PacientesController.actualizarPaciente);
+router.put('/:id', verificarToken, permitirRoles(3), validarPacientes, PacientesController.actualizarPaciente);
 
 /**
  * @swagger
@@ -107,7 +107,7 @@ router.put('/:id',validarPacientes,PacientesController.actualizarPaciente);
  *       500:
  *         description: Error del servidor
  */
-router.delete('/:id',PacientesController.borrarPaciente);
+router.delete('/:id', verificarToken, permitirRoles(3), PacientesController.borrarPaciente);
 
 /**
  * @swagger

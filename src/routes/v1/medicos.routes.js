@@ -28,7 +28,7 @@ const router = Router();
  *       500:
  *         description: Error del servidor
  */
-router.get('/', MedicosController.obtenerTodos);           
+router.get('/', verificarToken, permitirRoles(2, 3), MedicosController.obtenerTodos);
 
 /**
  * @swagger
@@ -48,7 +48,7 @@ router.get('/', MedicosController.obtenerTodos);
  *       500:
  *         description: Error del servidor
  */
-router.get('/:id', MedicosController.obtenerPorId);        
+router.get('/:id', verificarToken, permitirRoles(2, 3), MedicosController.obtenerPorId);
 
 /**
  * @swagger
@@ -68,7 +68,7 @@ router.get('/:id', MedicosController.obtenerPorId);
  *       500:
  *         description: Error del servidor
  */
-router.post('/', validarMedico, MedicosController.crear);  
+router.post('/', verificarToken, permitirRoles(3), validarMedico, MedicosController.crear);
 
 /**
  * @swagger
@@ -88,7 +88,7 @@ router.post('/', validarMedico, MedicosController.crear);
  *       500:
  *         description: Error del servidor
  */
-router.put('/:id', validarMedico, MedicosController.actualizar); 
+router.put('/:id', verificarToken, permitirRoles(3), validarMedico, MedicosController.actualizar);
 
 /**
  * @swagger
@@ -108,7 +108,7 @@ router.put('/:id', validarMedico, MedicosController.actualizar);
  *       500:
  *         description: Error del servidor
  */
-router.delete('/:id', MedicosController.borrar);
+router.delete('/:id', verificarToken, permitirRoles(3), MedicosController.borrar);
 
 /**
  * @swagger

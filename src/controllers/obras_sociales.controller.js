@@ -6,7 +6,7 @@ class ObrasSocialesController {
             const obrasSociales = await obrasSocialesService.buscarOS();
             res.json(obrasSociales);
         } catch (error) {
-            res.status(500).json({ message: 'Error al buscar las obras sociales', error });
+            throw error;
         }
     };
     buscarOSPorId = async (req, res) => {
@@ -19,7 +19,7 @@ class ObrasSocialesController {
                 res.status(404).json({ message: 'Obra social no encontrada' });
             }
         } catch (error) {
-            res.status(500).json({ message: 'Error al buscar la obra social', error });
+            throw error;
         }
     };
     crearOS = async (req, res) => {
@@ -28,7 +28,7 @@ class ObrasSocialesController {
             const nuevoOSId = await obrasSocialesService.crearOS(nombre, descripcion, porcentaje, es_particular, activo);
             res.status(201).json({ message: 'Obra social creada', id: nuevoOSId });
         } catch (error) {
-            res.status(500).json({ message: 'Error al crear la obra social', error });
+            throw error;
         }
     };
     actualizarOS = async (req, res) => {
@@ -38,7 +38,7 @@ class ObrasSocialesController {
             await obrasSocialesService.actualizarOS(id, nombre, descripcion, porcentaje, es_particular, activo);
             res.json({ message: 'Obra social actualizada' });
         } catch (error) {
-            res.status(500).json({ message: 'Error al actualizar la obra social', error });
+            throw error;
         }
     };
     borrarOS = async (req, res) => {
@@ -47,7 +47,7 @@ class ObrasSocialesController {
             await obrasSocialesService.borrarOS(id);
             res.json({ message: 'Obra social borrada' });
         } catch (error) {
-            res.status(500).json({ message: 'Error al borrar la obra social', error });
+            throw error;
         }
     };
 }

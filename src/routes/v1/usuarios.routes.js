@@ -2,8 +2,9 @@
 import { Router } from 'express';
 import UsuariosController from '../../controllers/usuarios.controller.js';
 import { validarUsuario } from '../../middlewares/usuarios.validator.js';
-import umpload from "../../middlewares/umpload.js";
-
+import upload from "../../middlewares/upload.js";
+import { verificarToken } from '../../middlewares/auth.js';
+import { permitirRoles } from '../../middlewares/roles.js';
 const router = Router();
 
 // Rutas del BREAD para Usuarios
@@ -26,7 +27,7 @@ const router = Router();
  *       500:
  *         description: Error del servidor
  */
-router.get('/', UsuariosController.obtenerUsuarios);
+router.get('/', verificarToken, permitirRoles(3), UsuariosController.obtenerUsuarios);
 
 /**
  * @swagger
@@ -46,7 +47,7 @@ router.get('/', UsuariosController.obtenerUsuarios);
  *       500:
  *         description: Error del servidor
  */
-router.get('/:id', validarUsuario, UsuariosController.obtenerUsuarioPorId);  
+router.get('/:id', verificarToken, permitirRoles(3), validarUsuario, UsuariosController.obtenerUsuarioPorId);
 
 /**
  * @swagger
@@ -66,7 +67,7 @@ router.get('/:id', validarUsuario, UsuariosController.obtenerUsuarioPorId);
  *       500:
  *         description: Error del servidor
  */
-router.put('/:id', validarUsuario, UsuariosController.actualizarUsuario); 
+router.put('/:id', verificarToken, permitirRoles(3), validarUsuario, upload.single("foto"), UsuariosController.actualizarUsuario);
 
 /**
  * @swagger
@@ -86,7 +87,7 @@ router.put('/:id', validarUsuario, UsuariosController.actualizarUsuario);
  *       500:
  *         description: Error del servidor
  */
-router.delete('/:id', validarUsuario, UsuariosController.borrarUsuario);   
+router.delete('/:id', verificarToken, permitirRoles(3), validarUsuario, UsuariosController.borrarUsuario);
 
 /**
  * @swagger
@@ -106,6 +107,6 @@ router.delete('/:id', validarUsuario, UsuariosController.borrarUsuario);
  *       500:
  *         description: Error del servidor
  */
-router.post("/",umpload.single("foto"),UsuariosController.crearUsuario); 
+router.post("/", verificarToken, permitirRoles(3), upload.single("foto"), validarUsuario, UsuariosController.crearUsuario); 
 
 export default router;

@@ -9,7 +9,8 @@ class PacientesService {
         return await PacientesDB.buscarPacientePorId(idPaciente);
     };
     crearPaciente = async (idUsuario, idObraSocial) => {
-        return await PacientesDB.crearPaciente(idUsuario, idObraSocial);
+        const insertId = await PacientesDB.crearPaciente(idUsuario, idObraSocial);
+        return await PacientesDB.buscarPacientePorId(insertId);
     };
     actualizarPaciente = async (idPaciente, idUsuario, idObraSocial) => {
         return await PacientesDB.actualizarPaciente(idPaciente, idUsuario, idObraSocial);

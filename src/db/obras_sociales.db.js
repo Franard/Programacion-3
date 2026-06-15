@@ -17,14 +17,14 @@ class ObrasSocialesDB {
     }
     async crearOS(nombre, descripcion, porcentaje, es_particular,activo) {
         const [result] = await pool.query(
-            'INSERT INTO obras_sociales (nombre, descripcion , porcentaje, es_particular ,activo) VALUES (?, ?, ?, ?, ?)',
+            'INSERT INTO obras_sociales (nombre, descripcion , porcentaje_descuento, es_particular ,activo) VALUES (?, ?, ?, ?, ?)',
             [nombre, descripcion, porcentaje, es_particular, activo]
         );
         return result.insertId;
     }
     async actualizarOS(id, nombre, descripcion, porcentaje, es_particular, activo) {
         await pool.query(
-            'UPDATE obras_sociales SET nombre = ?, descripcion = ?, porcentaje = ?, es_particular = ?, activo = ? WHERE id_obra_social = ?',
+            'UPDATE obras_sociales SET nombre = ?, descripcion = ?, porcentaje_descuento = ?, es_particular = ?, activo = ? WHERE id_obra_social = ?',
             [nombre, descripcion, porcentaje, es_particular, activo, id]
         );
     }

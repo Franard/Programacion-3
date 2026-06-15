@@ -18,12 +18,12 @@ class MedicosService {
 
     crear = async (medicoData) => {
         const nuevoId = await MedicosDB.crear(medicoData);
-        // Retornar el objeto completo creado (Regla 4)
+        // Devuelve objeto completo
         return await MedicosDB.obtenerPorId(nuevoId);
     };
 
     actualizar = async (id, medicoData) => {
-        // Validar existencia primero en el Service (Regla 4)
+        // Chequeo de existencia
         const existe = await MedicosDB.obtenerPorId(id);
         if (!existe) {
             const error = new Error('Médico no encontrado para actualizar');
@@ -34,7 +34,7 @@ class MedicosService {
     };
 
     borrar = async (id) => {
-        // Validar existencia primero en el Service (Regla 4)
+        // Chequeo de existencia
         const existe = await MedicosDB.obtenerPorId(id);
         if (!existe) {
             const error = new Error('Médico no encontrado para borrar');

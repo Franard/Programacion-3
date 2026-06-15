@@ -1,6 +1,8 @@
 // Código de Angel C.
 import { Router } from 'express';
 import ReportesController from '../../controllers/reportes.controller.js';
+import { verificarToken } from '../../middlewares/auth.js';
+import { permitirRoles } from '../../middlewares/roles.js';
 
 const router = Router();
 
@@ -23,6 +25,6 @@ const router = Router();
  *       500:
  *         description: Error del servidor
  */
-router.get("/turnos/pdf",ReportesController.pdf);
+router.get("/turnos/pdf", verificarToken, permitirRoles(3), ReportesController.pdf);
 
 export default router;

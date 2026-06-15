@@ -57,7 +57,28 @@ class AuthService {
 
     }
 
+    registro = async (usuarioData, idObraSocial) => {
+        // Validar obra social
+        const { default: ObrasSocialesDB } = await import('../db/obras_sociales.db.js');
+        const obraSocial = await ObrasSocialesDB.buscarOSPorId(idObraSocial);
+        
+        if (!obraSocial) {
+            throw new Error("La Obra Social especificada no existe o no está activa");
+        }
 
+        // Forzar rol paciente
+        usuarioData.rol = 2;
+
+        // Crear usuario base
+        const { default: UsuariosService } = await import('./usuarios.service.js');
+        const nuevoUsuario = await UsuariosService.crearUsuario(usuarioData);
+
+        // Crear paciente
+        const { default: PacientesService } = await import('./pacientes.service.js');
+        const nuevoPaciente = await PacientesService.crearPaciente(nuevoUsuario.id_usuario, idObraSocial);
+
+        return nuevoPaciente;
+    }
 }
 
 

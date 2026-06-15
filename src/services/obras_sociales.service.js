@@ -9,7 +9,8 @@ class ObrasSocialesService {
         return await obrasSocialesDB.buscarOSPorId(id);
     };
     crearOS = async (nombre, descripcion, porcentaje, es_particular,activo) => {
-        return await obrasSocialesDB.crearOS(nombre, descripcion, porcentaje, es_particular, activo);
+        const insertId = await obrasSocialesDB.crearOS(nombre, descripcion, porcentaje, es_particular, activo);
+        return await obrasSocialesDB.buscarOSPorId(insertId);
     };
     actualizarOS = async (id, nombre, descripcion, porcentaje, es_particular, activo) => {
         return await obrasSocialesDB.actualizarOS(id, nombre, descripcion, porcentaje, es_particular, activo);

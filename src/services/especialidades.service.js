@@ -22,12 +22,12 @@ export default class EspecialidadesService {
 
     async crear(datos) {
         const insertId = await this.db.crear(datos.nombre);
-        // Retornar el objeto completo creado (Regla 4)
+        // Devuelve objeto completo
         return await this.db.buscarPorId(insertId);
     }
 
     async actualizar(id, datos) {
-        // Validar existencia primero en el Service (Regla 4)
+        // Chequeo de existencia
         const existe = await this.db.buscarPorId(id);
         if (!existe) {
             const error = new Error('Especialidad no encontrada para actualizar');
@@ -38,7 +38,7 @@ export default class EspecialidadesService {
     }
 
     async borrar(id) {
-        // Validar existencia primero en el Service (Regla 4)
+        // Chequeo de existencia
         const existe = await this.db.buscarPorId(id);
         if (!existe) {
             const error = new Error('Especialidad no encontrada para borrar');
